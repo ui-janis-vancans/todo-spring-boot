@@ -6,3 +6,5 @@ out
 *.iws
 .idea
 .gradle
+libobjectbox-jni-linux-x64.so
+demo-db

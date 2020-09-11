@@ -1,31 +1,38 @@
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath "io.objectbox:objectbox-gradle-plugin:2.7.1"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '1.5.6.RELEASE'
 }
 
-apply plugin: 'war'
+apply plugin: 'application'
+apply plugin: 'io.objectbox'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-war {
-    baseName = 'todo'
-    version = '1.0.0'
-}
 
 apply from: "$rootDir/gradle/integration-test.gradle"
-apply from: "$rootDir/gradle/code-analysis.gradle"
-apply from: "$rootDir/gradle/deploy.gradle"
 
 repositories {
+    jcenter()
     mavenCentral()
+    google()
 }
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    runtime('com.h2database:h2')
+    implementation("io.objectbox:objectbox-java:2.7.1")
+    runtime("io.objectbox:objectbox-linux:2.7.1")
     runtime('javax.servlet:jstl')
-    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-    providedRuntime('org.apache.tomcat.embed:tomcat-embed-jasper')
+    runtime('org.springframework.boot:spring-boot-starter-tomcat')
+    runtime('org.apache.tomcat.embed:tomcat-embed-jasper')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
