@@ -1,5 +1,10 @@
-gradle clean build && docker build -t "obt:Dockerfile" . && sudo docker run -it -p 8080:8080 obt:Dockerfile
+gradle clean build && docker build -t "obt:Dockerfile" . && sudo docker run -it -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=db-objectbox" obt:Dockerfile
 
 with memory limit:
-gradle clean build && docker build -t "obt:Dockerfile" . && sudo docker run -it -p 8080:8080 -m 100m --memory-swap 100m obt:Dockerfile
+gradle clean build && docker build -t "obt:Dockerfile" . && sudo docker run -it -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=db-objectbox" -m 100m --memory-swap 100m obt:Dockerfile
 
+
+adding new database and profile:
+- Use DatabaseProfile class to add profile
+- implement ToDoRepository and set the @Profile condition for it to load only with given profile
+- run docker with -e "SPRING_PROFILES_ACTIVE=$you_profile_name"
