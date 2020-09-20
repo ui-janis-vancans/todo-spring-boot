@@ -4,18 +4,22 @@ import com.manning.gia.todo.DatabaseProfiles;
 import com.manning.gia.todo.model.ToDoItem;
 import com.manning.gia.todo.repository.ToDoRepository;
 import io.objectbox.Box;
+import io.objectbox.BoxStore;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PreDestroy;
 import java.util.List;
 
 @Service
 @Profile(DatabaseProfiles.OBJECTBOX)
 public class ToDoObjectBoxRepository implements ToDoRepository {
 
+    private final BoxStore objectStore;
     private final Box<ToDoItem> todoItemBox;
 
-    public ToDoObjectBoxRepository(Box<ToDoItem> todoItemBox) {
+    public ToDoObjectBoxRepository(BoxStore objectStore, Box<ToDoItem> todoItemBox) {
+        this.objectStore = objectStore;
         this.todoItemBox = todoItemBox;
     }
 
@@ -37,5 +41,11 @@ public class ToDoObjectBoxRepository implements ToDoRepository {
     @Override
     public void delete(ToDoItem toDoItem) {
         todoItemBox.remove(toDoItem);
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        objectStore.close();
+        objectStore.closeThreadResources();
     }
 }
