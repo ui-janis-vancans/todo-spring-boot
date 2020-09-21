@@ -1,6 +1,7 @@
 FROM adoptopenjdk/openjdk8:alpine-jre
 
 WORKDIR /root
-COPY . /root/
-CMD ["java", "-jar", "build/libs/todo-spring-boot.jar"]
+COPY build/libs/todo-spring-boot.jar /root/todo-app.jar
+COPY src/main/webapp /root/src/main/webapp
+CMD ["java", "-jar", "todo-app.jar"]
 EXPOSE 8080/tcp

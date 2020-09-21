@@ -10,13 +10,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import java.io.File;
+
 @Configuration
 @Profile(DatabaseProfiles.OBJECTBOX)
 class ObjectBoxConfig {
 
     @Bean
     BoxStore objectBoxStore() {
-        BoxStoreBuilder storeBuilder = MyObjectBox.builder().name("demo-db");
+        BoxStoreBuilder storeBuilder = MyObjectBox.builder()
+                .baseDirectory(new File("data"))
+                .name("demo-db");
         return storeBuilder.build();
     }
 

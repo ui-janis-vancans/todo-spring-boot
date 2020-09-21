@@ -19,7 +19,6 @@ apply plugin: 'io.objectbox'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
 apply from: "$rootDir/gradle/integration-test.gradle"
 
 repositories {
@@ -29,9 +28,8 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("io.objectbox:objectbox-java:2.7.1")
-    runtime("io.objectbox:objectbox-linux:2.7.1")
     runtime('javax.servlet:jstl')
     runtime('org.springframework.boot:spring-boot-starter-tomcat')
     runtime('org.apache.tomcat.embed:tomcat-embed-jasper')

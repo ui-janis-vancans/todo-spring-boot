@@ -8,3 +8,4 @@ out
 .gradle
 libobjectbox-jni-linux-x64.so
 demo-db
+data
