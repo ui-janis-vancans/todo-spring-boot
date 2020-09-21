@@ -1,10 +1,10 @@
 ### Running the application with database profile
 ```bash
-./start your-db-profile-name
+./start.sh your-db-profile-name
 ```
 For example: 
 ```bash
-./start db-objectbox
+./start.sh db-objectbox
 ```
 
 
