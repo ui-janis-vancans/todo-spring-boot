@@ -8,6 +8,6 @@ For example:
 ```
 
 
-### Adding new database profile:
+### Adding new database profile
 - Add profile to DatabaseProfile class
 - Implement ToDoRepository and set the `@Profile` condition for it to load **only when given profile is active**
