@@ -3,8 +3,10 @@ package com.manning.gia.todo.model;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 
+import java.io.Serializable;
+
 @Entity
-public class ToDoItem {
+public class ToDoItem implements Serializable {
 
     @Id
     private long id;
