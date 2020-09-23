@@ -54,7 +54,7 @@ class ToDoMapdbRepository implements ToDoRepository, InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        Long maxExistingId = todos.keySet().stream()
+        long maxExistingId = todos.keySet().stream()
                 .max(Long::compareTo)
                 .orElse(DEFAULT_START_ID);
         ids.set(maxExistingId);
