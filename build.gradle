@@ -30,6 +30,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("io.objectbox:objectbox-java:2.7.1")
+    implementation("org.mapdb:mapdb:3.0.4")
     runtime('javax.servlet:jstl')
     runtime('org.springframework.boot:spring-boot-starter-tomcat')
     runtime('org.apache.tomcat.embed:tomcat-embed-jasper')
