@@ -1,0 +1,15 @@
+execution:
+  concurrency: 10
+  hold-for: 2m30s
+  ramp-up: 1m
+  scenario: Thread Group
+
+scenarios:
+  Thread Group:
+    requests:
+      - label: all
+        method: GET
+        url: http://objectbox:8080/all
+      - label: active
+        method: GET
+        url: http://objectbox:8080/active

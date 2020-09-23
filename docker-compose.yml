@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  objectbox:
+    build: .
+    environment:
+      - SPRING_PROFILES_ACTIVE=db-objectbox
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+  taurus:
+    image: blazemeter/taurus
+    volumes:
+      - ./taurus/:/bzt-configs
+    command:
+      "taurustest.yml -report"
