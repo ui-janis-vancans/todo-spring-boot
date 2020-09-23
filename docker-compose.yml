@@ -8,6 +8,11 @@ services:
       - "8080"
     ports:
       - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 200M
   mapdb:
     build: .
     environment:
@@ -16,6 +21,11 @@ services:
       - "8080"
     ports:
       - "8081:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 200M
   taurus:
     image: blazemeter/taurus
     volumes:

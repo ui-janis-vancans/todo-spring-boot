@@ -7,15 +7,9 @@ execution:
 scenarios:
   Thread Group:
     requests:
-      - label: objectbox-all
-        method: GET
-        url: http://objectbox:8080/all
-      - label: objectbox-active
-        method: GET
-        url: http://objectbox:8080/active
-      - label: mapdb-all
-        method: GET
-        url: http://mapdb:8080/all
-      - label: mapdb-active
-        method: GET
-        url: http://mapdb:8080/active
+      - label: objectbox-insert-query-all
+        method: POST
+        url: http://objectbox:8080/insert?name=testName&filter=all
+      - label: mapdb-insert-query-all
+        method: POST
+        url: http://mapdb:8080/insert?name=testName&filter=all
