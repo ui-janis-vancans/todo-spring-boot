@@ -49,7 +49,7 @@ services:
     command:
       "taurustest.yml -report"
     environment:
-      - WAIT_HOSTS=objectbox:8080, mapdb:8080, springbootserver:1111
+      - WAIT_HOSTS=objectbox:8080, mapdb:8080, nitrite:8080, springbootserver:1111
       - WAIT_HOSTS_TIMEOUT=300
       - WAIT_SLEEP_INTERVAL=5
       - WAIT_HOST_CONNECT_TIMEOUT=30
