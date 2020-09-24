@@ -8,7 +8,7 @@ services:
     expose:
       - "8080"
     ports:
-      - "8080:8080"
+      - "10001:8080"
     deploy:
       resources:
         limits:
@@ -22,7 +22,7 @@ services:
     expose:
       - "8080"
     ports:
-      - "8081:8080"
+      - "10002:8080"
     deploy:
       resources:
         limits:
@@ -36,7 +36,7 @@ services:
     expose:
       - "8080"
     ports:
-      - "8082:8080"
+      - "10003:8080"
     deploy:
       resources:
         limits:
@@ -61,3 +61,14 @@ services:
       - "1111"
     ports:
       - "1111:1111"
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    expose:
+      - 9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
