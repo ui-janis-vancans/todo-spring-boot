@@ -4,6 +4,7 @@ services:
     build: .
     environment:
       - SPRING_PROFILES_ACTIVE=db-objectbox
+      - APPLICATION_NAME=db-objectbox
     expose:
       - "8080"
     ports:
@@ -12,6 +13,7 @@ services:
     build: .
     environment:
       - SPRING_PROFILES_ACTIVE=db-mapdb
+      - APPLICATION_NAME=db-mapdb
     expose:
       - "8080"
     ports:
@@ -22,3 +24,9 @@ services:
       - ./taurus/:/bzt-configs
     command:
       "taurustest.yml -report"
+  springbootserver:
+    image: slydeveloper/spring-boot-admin:latest
+    expose:
+      - "1111"
+    ports:
+      - "1111:1111"
