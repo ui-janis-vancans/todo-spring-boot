@@ -11,8 +11,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
-          memory: 200M
+          cpus: '0.5'
+          memory: 500M
   mapdb:
     build: .
     environment:
@@ -24,11 +24,16 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
-          memory: 200M
+          cpus: '0.5'
+          memory: 500M
   taurus:
-    image: blazemeter/taurus
+    build: taurus/.
     volumes:
       - ./taurus/:/bzt-configs
     command:
       "taurustest.yml -report"
+    environment:
+      - WAIT_HOSTS=objectbox:8080, mapdb:8080
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=5
+      - WAIT_HOST_CONNECT_TIMEOUT=30

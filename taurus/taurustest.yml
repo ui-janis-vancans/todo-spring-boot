@@ -1,11 +1,13 @@
 execution:
-  concurrency: 10
-  hold-for: 2m30s
-  ramp-up: 1m
-  scenario: Thread Group
+- concurrency: 30
+  hold-for: 2m
+  ramp-up: 45s
+  throughput: 15
+  steps: 3
+  scenario: insert_query-all
 
 scenarios:
-  Thread Group:
+  insert_query-all:
     requests:
       - label: objectbox-insert-query-all
         method: POST
