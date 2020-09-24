@@ -13,6 +13,7 @@ public class NitriteConfig {
     @Bean
     Nitrite nitriteDatabase() {
         Nitrite db = Nitrite.builder()
+                .filePath("/tmp/test.db")
                 .openOrCreate();
         Runtime.getRuntime().addShutdownHook(new Thread(db::close));
         return db;
