@@ -18,6 +18,15 @@ services:
       - "8080"
     ports:
       - "8081:8080"
+  nitrite:
+    build: .
+    environment:
+      - SPRING_PROFILES_ACTIVE=db-nitrite
+      - APPLICATION_NAME=db-nitrite
+    expose:
+      - "8080"
+    ports:
+      - "8082:8080"
   taurus:
     image: blazemeter/taurus
     volumes:
