@@ -30,8 +30,8 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("io.objectbox:objectbox-java:2.7.1")
-    implementation("io.objectbox:objectbox-linux:2.7.1")
-    implementation("io.objectbox:objectbox-macos:2.7.1")
+    implementation("io.objectbox:objectbox-linux:2.7.1") // required for running in docker
+    implementation('org.dizitart:nitrite:3.4.2')
     implementation("org.mapdb:mapdb:3.0.4")
     runtime('javax.servlet:jstl')
     runtime('org.springframework.boot:spring-boot-starter-tomcat')

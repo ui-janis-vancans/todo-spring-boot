@@ -1,14 +1,14 @@
 package com.manning.gia.todo.model;
 
 import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
 
 import java.io.Serializable;
 
 @Entity
 public class ToDoItem implements Serializable {
 
-    @Id
+    @io.objectbox.annotation.Id
+    @org.dizitart.no2.objects.Id
     private long id;
     private String name;
     private boolean completed;
