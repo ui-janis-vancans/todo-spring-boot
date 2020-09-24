@@ -35,6 +35,8 @@ services:
       "taurustest.yml -report"
   springbootserver:
     image: slydeveloper/spring-boot-admin:latest
+    environment:
+      - SPRING_BOOT_ADMIN_SECURITY_ENABLED=false
     expose:
       - "1111"
     ports:
