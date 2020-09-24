@@ -1,0 +1,17 @@
+execution:
+- concurrency: 30
+  hold-for: 2m
+  ramp-up: 45s
+  throughput: 15
+  steps: 3
+  scenario: insert_query-all
+
+scenarios:
+  insert_query-all:
+    requests:
+      - label: objectbox-insert-query-all
+        method: POST
+        url: http://objectbox:8080/insert?name=testName&filter=all
+      - label: mapdb-insert-query-all
+        method: POST
+        url: http://mapdb:8080/insert?name=testName&filter=all
