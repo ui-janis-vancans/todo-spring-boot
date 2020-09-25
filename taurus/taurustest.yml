@@ -5,6 +5,12 @@ execution:
   throughput: 15
   steps: 3
   scenario: insert_query-all
+- concurrency: 10
+  hold-for: 2m
+  ramp-up: 30s
+  throughput: 15
+  steps: 3
+  scenario: query-completed
 
 scenarios:
   insert_query-all:
@@ -18,3 +24,20 @@ scenarios:
       - label: nitrite-insert-query-all
         method: POST
         url: http://nitrite:8080/insert?name=testName&filter=all
+      - label: mongo-insert-query-all
+        method: POST
+        url: http://mongo:8080/insert?name=testName&filter=all
+  query-completed:
+    requests:
+      - label: objectbox-query-completed
+        method: GET
+        url: http://objectbox:8080/completed
+      - label: mapdb-query-completed
+        method: GET
+        url: http://objectbox:8080/completed
+      - label: nitrite-query-completed
+        method: GET
+        url: http://objectbox:8080/completed
+      - label: mongo-query-completed
+        method: GET
+        url: http://objectbox:8080/completed
