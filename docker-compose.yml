@@ -8,7 +8,7 @@ services:
     expose:
       - "8080"
     ports:
-      - "8080:8080"
+      - "10001:8080"
     deploy:
       resources:
         limits:
@@ -22,7 +22,7 @@ services:
     expose:
       - "8080"
     ports:
-      - "8081:8080"
+      - "10002:8080"
     deploy:
       resources:
         limits:
@@ -36,7 +36,7 @@ services:
     expose:
       - "8080"
     ports:
-      - "8082:8080"
+      - "10003:8080"
     deploy:
       resources:
         limits:
@@ -49,7 +49,7 @@ services:
     command:
       "taurustest.yml -report"
     environment:
-      - WAIT_HOSTS=objectbox:8080, mapdb:8080, nitrite:8080, springbootserver:1111
+      - WAIT_HOSTS=objectbox:8080, mapdb:8080, nitrite:8080, prometheus:9090, grafana:3000, springbootserver:1111
       - WAIT_HOSTS_TIMEOUT=300
       - WAIT_SLEEP_INTERVAL=5
       - WAIT_HOST_CONNECT_TIMEOUT=30
@@ -61,3 +61,23 @@ services:
       - "1111"
     ports:
       - "1111:1111"
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    expose:
+      - 9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards/dashboards
+    ports:
+      - 3000:3000
