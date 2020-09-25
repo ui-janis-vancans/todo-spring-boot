@@ -34,10 +34,10 @@ scenarios:
         url: http://objectbox:8080/completed
       - label: mapdb-query-completed
         method: GET
-        url: http://objectbox:8080/completed
+        url: http://mapdb:8080/completed
       - label: nitrite-query-completed
         method: GET
-        url: http://objectbox:8080/completed
+        url: http://nitrite:8080/completed
       - label: mongo-query-completed
         method: GET
-        url: http://objectbox:8080/completed
+        url: http://mongo:8080/completed
