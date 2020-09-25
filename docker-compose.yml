@@ -4,6 +4,7 @@ services:
     build: .
     environment:
       - SPRING_PROFILES_ACTIVE=db-objectbox
+      - APPLICATION_NAME=db-objectbox
     expose:
       - "8080"
     ports:
@@ -17,10 +18,25 @@ services:
     build: .
     environment:
       - SPRING_PROFILES_ACTIVE=db-mapdb
+      - APPLICATION_NAME=db-mapdb
     expose:
       - "8080"
     ports:
       - "8081:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 500M
+  nitrite:
+    build: .
+    environment:
+      - SPRING_PROFILES_ACTIVE=db-nitrite
+      - APPLICATION_NAME=db-nitrite
+    expose:
+      - "8080"
+    ports:
+      - "8082:8080"
     deploy:
       resources:
         limits:
@@ -33,7 +49,15 @@ services:
     command:
       "taurustest.yml -report"
     environment:
-      - WAIT_HOSTS=objectbox:8080, mapdb:8080
+      - WAIT_HOSTS=objectbox:8080, mapdb:8080, nitrite:8080, springbootserver:1111
       - WAIT_HOSTS_TIMEOUT=300
       - WAIT_SLEEP_INTERVAL=5
       - WAIT_HOST_CONNECT_TIMEOUT=30
+  springbootserver:
+    image: slydeveloper/spring-boot-admin:latest
+    environment:
+      - SPRING_BOOT_ADMIN_SECURITY_ENABLED=false
+    expose:
+      - "1111"
+    ports:
+      - "1111:1111"

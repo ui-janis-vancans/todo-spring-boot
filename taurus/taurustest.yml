@@ -15,3 +15,6 @@ scenarios:
       - label: mapdb-insert-query-all
         method: POST
         url: http://mapdb:8080/insert?name=testName&filter=all
+      - label: nitrite-insert-query-all
+        method: POST
+        url: http://nitrite:8080/insert?name=testName&filter=all
