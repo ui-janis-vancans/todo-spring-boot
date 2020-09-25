@@ -47,4 +47,11 @@ public class MongoRepository implements ToDoRepository {
     public void delete(ToDoItem toDoItem) {
         template.remove(toDoItem);
     }
+
+    @Override
+    public List<ToDoItem> findCompleted() {
+        Query completedQuery = new Query();
+        completedQuery.addCriteria(Criteria.where("completed").is(true));
+        return template.find(completedQuery, ToDoItem.class);
+    }
 }

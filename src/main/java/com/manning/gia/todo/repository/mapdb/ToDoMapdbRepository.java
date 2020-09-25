@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Service
 @Profile(DatabaseProfiles.MAPDB)
@@ -50,6 +51,11 @@ class ToDoMapdbRepository implements ToDoRepository, InitializingBean {
     @Override
     public void delete(ToDoItem toDoItem) {
         todos.remove(toDoItem.getId());
+    }
+
+    @Override
+    public List<ToDoItem> findCompleted() {
+        return findAll().stream().filter(ToDoItem::isCompleted).collect(Collectors.toList());
     }
 
     @Override

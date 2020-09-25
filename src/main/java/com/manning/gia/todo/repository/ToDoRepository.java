@@ -13,4 +13,6 @@ public interface ToDoRepository {
     List<ToDoItem> findAll();
 
     void delete(ToDoItem toDoItem);
+
+    List<ToDoItem> findCompleted();
 }

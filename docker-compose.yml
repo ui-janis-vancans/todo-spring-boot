@@ -1,7 +1,10 @@
 version: "3.8"
 services:
   objectbox:
-    build: .
+    build:
+      context: .
+      args:
+        - JAVA_OPTIONS=-Xmx400m -Xms100m
     environment:
       - SPRING_PROFILES_ACTIVE=db-objectbox
       - SPRING_BOOT_ADMIN_CLIENT_URL=http://springbootserver:1111
@@ -12,10 +15,13 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: '0.25'
           memory: 500M
   mapdb:
-    build: .
+    build:
+      context: .
+      args:
+        - JAVA_OPTIONS=-Xmx400m -Xms100m
     environment:
       - SPRING_PROFILES_ACTIVE=db-mapdb
       - SPRING_BOOT_ADMIN_CLIENT_URL=http://springbootserver:1111
@@ -26,10 +32,13 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: '0.25'
           memory: 500M
   nitrite:
-    build: .
+    build:
+      context: .
+      args:
+        - JAVA_OPTIONS=-Xmx400m -Xms100m
     environment:
       - SPRING_PROFILES_ACTIVE=db-nitrite
       - SPRING_BOOT_ADMIN_CLIENT_URL=http://springbootserver:1111
@@ -40,10 +49,13 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: '0.25'
           memory: 500M
   mongo:
-    build: .
+    build:
+      context: .
+      args:
+        - JAVA_OPTIONS=-Xmx400m -Xms100m
     environment:
       - SPRING_PROFILES_ACTIVE=db-mongo
       - SPRING_BOOT_ADMIN_CLIENT_URL=http://springbootserver:1111
@@ -54,7 +66,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: '0.25'
           memory: 500M
   taurus:
     build: taurus/.
