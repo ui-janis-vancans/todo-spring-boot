@@ -29,16 +29,22 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation group: 'de.codecentric', name: 'spring-boot-admin-starter-client', version: '2.2.4'
     implementation('org.springframework.security:spring-security-core')
     implementation('org.springframework.security:spring-security-config')
     implementation('org.springframework.security:spring-security-web')
+
+    // databases
     implementation("io.objectbox:objectbox-java:2.7.1")
     implementation("io.objectbox:objectbox-linux:2.7.1") // required for running in docker
     implementation('org.dizitart:nitrite:3.4.2')
-    implementation('io.micrometer:micrometer-registry-prometheus:1.5.5')
     implementation("org.mapdb:mapdb:3.0.4")
+
+    // application metrics
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation('io.micrometer:micrometer-registry-prometheus:1.5.5')
+    implementation('io.github.mweirauch:micrometer-jvm-extras:0.2.0')
+
     runtime('javax.servlet:jstl')
     runtime('org.springframework.boot:spring-boot-starter-tomcat')
     runtime('org.apache.tomcat.embed:tomcat-embed-jasper')
