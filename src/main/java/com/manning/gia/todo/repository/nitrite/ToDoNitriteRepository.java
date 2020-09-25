@@ -44,4 +44,10 @@ public class ToDoNitriteRepository implements ToDoRepository {
     public void delete(ToDoItem toDoItem) {
         repository.remove(toDoItem);
     }
+
+    @Override
+    public List<ToDoItem> findCompleted() {
+        return repository.find(ObjectFilters.eq("completed", true))
+                .toList();
+    }
 }

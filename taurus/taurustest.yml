@@ -4,17 +4,60 @@ execution:
   ramp-up: 45s
   throughput: 15
   steps: 3
-  scenario: insert_query-all
+  scenario: insert
+- concurrency: 15
+  hold-for: 3m
+  ramp-up: 30s
+  throughput: 15
+  steps: 3
+  scenario: query-all
+- concurrency: 20
+  hold-for: 2m30s
+  ramp-up: 30s
+  throughput: 30
+  steps: 5
+  scenario: query-completed
 
 scenarios:
-  insert_query-all:
+  insert:
     requests:
-      - label: objectbox-insert-query-all
+      - label: objectbox-insert
         method: POST
-        url: http://objectbox:8080/insert?name=testName&filter=all
-      - label: mapdb-insert-query-all
+        url: http://objectbox:8080/todo-items?name=testName
+      - label: mapdb-insert
         method: POST
-        url: http://mapdb:8080/insert?name=testName&filter=all
-      - label: nitrite-insert-query-all
+        url: http://mapdb:8080/todo-items?name=testName
+      - label: nitrite-insert
         method: POST
-        url: http://nitrite:8080/insert?name=testName&filter=all
+        url: http://nitrite:8080/todo-items?name=testName
+      - label: mongo-insert
+        method: POST
+        url: http://mongo:8080/todo-items?name=testName
+  query-all:
+    requests:
+      - label: objectbox-query-all
+        method: GET
+        url: http://objectbox:8080/todo-items
+      - label: mapdb-query-all
+        method: GET
+        url: http://mapdb:8080/todo-items
+      - label: nitrite-query-all
+        method: GET
+        url: http://nitrite:8080/todo-items
+      - label: mongo-query-all
+        method: GET
+        url: http://mongo:8080/todo-items
+  query-completed:
+    requests:
+      - label: objectbox-query-completed
+        method: GET
+        url: http://objectbox:8080/todo-items/completed
+      - label: mapdb-query-completed
+        method: GET
+        url: http://mapdb:8080/todo-items/completed
+      - label: nitrite-query-completed
+        method: GET
+        url: http://nitrite:8080/todo-items/completed
+      - label: mongo-query-completed
+        method: GET
+        url: http://mongo:8080/todo-items/completed

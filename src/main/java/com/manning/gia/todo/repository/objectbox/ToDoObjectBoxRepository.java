@@ -2,9 +2,11 @@ package com.manning.gia.todo.repository.objectbox;
 
 import com.manning.gia.todo.DatabaseProfiles;
 import com.manning.gia.todo.model.ToDoItem;
+import com.manning.gia.todo.model.ToDoItem_;
 import com.manning.gia.todo.repository.ToDoRepository;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
+import io.objectbox.query.QueryBuilder;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,13 @@ public class ToDoObjectBoxRepository implements ToDoRepository {
     @Override
     public void delete(ToDoItem toDoItem) {
         todoItemBox.remove(toDoItem);
+    }
+
+    @Override
+    public List<ToDoItem> findCompleted() {
+        QueryBuilder<ToDoItem> completedQuery = todoItemBox.query();
+        completedQuery.equal(ToDoItem_.completed, true);
+        return completedQuery.build().find();
     }
 
     @PreDestroy

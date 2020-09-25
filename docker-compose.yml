@@ -1,10 +1,13 @@
 version: "3.8"
 services:
   objectbox:
-    build: .
+    build:
+      context: .
+      args:
+        - JAVA_OPTIONS=-Xmx400m -Xms100m
     environment:
       - SPRING_PROFILES_ACTIVE=db-objectbox
-      - APPLICATION_NAME=db-objectbox
+      - SPRING_BOOT_ADMIN_CLIENT_URL=http://springbootserver:1111
     expose:
       - "8080"
     ports:
@@ -12,13 +15,16 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: '0.25'
           memory: 500M
   mapdb:
-    build: .
+    build:
+      context: .
+      args:
+        - JAVA_OPTIONS=-Xmx400m -Xms100m
     environment:
       - SPRING_PROFILES_ACTIVE=db-mapdb
-      - APPLICATION_NAME=db-mapdb
+      - SPRING_BOOT_ADMIN_CLIENT_URL=http://springbootserver:1111
     expose:
       - "8080"
     ports:
@@ -26,13 +32,16 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: '0.25'
           memory: 500M
   nitrite:
-    build: .
+    build:
+      context: .
+      args:
+        - JAVA_OPTIONS=-Xmx400m -Xms100m
     environment:
       - SPRING_PROFILES_ACTIVE=db-nitrite
-      - APPLICATION_NAME=db-nitrite
+      - SPRING_BOOT_ADMIN_CLIENT_URL=http://springbootserver:1111
     expose:
       - "8080"
     ports:
@@ -40,7 +49,24 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: '0.25'
+          memory: 500M
+  mongo:
+    build:
+      context: .
+      args:
+        - JAVA_OPTIONS=-Xmx400m -Xms100m
+    environment:
+      - SPRING_PROFILES_ACTIVE=db-mongo
+      - SPRING_BOOT_ADMIN_CLIENT_URL=http://springbootserver:1111
+    expose:
+      - "8080"
+    ports:
+      - "10004:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
           memory: 500M
   taurus:
     build: taurus/.
@@ -49,7 +75,7 @@ services:
     command:
       "taurustest.yml -report"
     environment:
-      - WAIT_HOSTS=objectbox:8080, mapdb:8080, nitrite:8080, prometheus:9090, grafana:3000, springbootserver:1111
+      - WAIT_HOSTS=objectbox:8080, mapdb:8080, nitrite:8080, mongo:8080, prometheus:9090, grafana:3000, springbootserver:1111
       - WAIT_HOSTS_TIMEOUT=300
       - WAIT_SLEEP_INTERVAL=5
       - WAIT_HOST_CONNECT_TIMEOUT=30
