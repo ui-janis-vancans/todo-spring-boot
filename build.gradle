@@ -39,8 +39,6 @@ dependencies {
     implementation("io.objectbox:objectbox-linux:2.7.1") // required for running in docker
     implementation('org.dizitart:nitrite:3.4.2')
     implementation("org.mapdb:mapdb:3.0.4")
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    implementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.2.0")
 
     // application metrics
     implementation("org.springframework.boot:spring-boot-starter-actuator")

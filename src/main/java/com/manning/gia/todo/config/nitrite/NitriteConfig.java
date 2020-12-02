@@ -14,6 +14,7 @@ public class NitriteConfig {
     Nitrite nitriteDatabase() {
         Nitrite db = Nitrite.builder()
                 .filePath("/tmp/test.db")
+                .compressed()
                 .openOrCreate();
         Runtime.getRuntime().addShutdownHook(new Thread(db::close));
         return db;
